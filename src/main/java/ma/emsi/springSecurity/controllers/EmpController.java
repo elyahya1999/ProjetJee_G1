@@ -63,5 +63,10 @@ public class EmpController {
         emp.save(employe);
         return "redirect:/user/index";
     }
+    @GetMapping("/")
+    public String home()
+    {
+        return "redirect:/user/index";
+    }
 
 }
