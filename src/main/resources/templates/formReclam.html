@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template1">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulaire Reclamation</title>
+  <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css">
+</head>
+<body>
+<div layout:fragment="content1">
+  <div class="col-md-6 offset-3">
+    <form method="post" th:action="@{/admin/save2}">
+      <div>
+        <label for="titre">Titre</label>
+        <input id="titre" class="form-control" type="text" name="titre" th:value="${Reclamation.titre}">
+        <span th:errors="${Reclamation.titre}"></span>
+      </div>
+      <div>
+        <label for="description">Description</label>
+        <input id="description" class="form-control" type="text" name="description" th:value="${Reclamation.description}">
+        <span th:errors="${Reclamation.description}"></span>
+      </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+
+    </form>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Tache</title>
+</head>
+<body>
+<h1>Create New Tache</h1>
+<form action="#" th:action="@{/saveTache}" th:object="${tache}" method="post">
+    <label for="nom">Nom:</label><br>
+    <input type="text" id="nom" th:field="*{nom}"><br>
+    <label for="description">Description:</label><br>
+    <input type="text" id="description" th:field="*{description}"><br>
+    <label for="dateDebut">Date Debut:</label><br>
+    <input type="date" id="dateDebut" th:field="*{dateDebut}"><br>
+    <label for="dateFin">Date Fin:</label><br>
+    <input type="date" id="dateFin" th:field="*{dateFin}"><br>
+    <label for="status">Status:</label><br>
+    <input type="text" id="status" th:field="*{status}"><br>
+    <input type="submit" value="Submit">
+    <label for="projet">Projet:</label><br>
+    <select id="projet" th:field="*{projet}">
+        <option th:each="projet : ${projets}" th:value="${projet.id}" th:text="${projet.nom}"></option>
+    </select><br>
+    <label for="employe">Employe:</label><br>
+    <select id="employe" th:field="*{employe}">
+        <option th:each="employe : ${employes}" th:value="${employe.id}" th:text="${employe.nom}"></option>
+    </select><br>
+</form>
+</body>
+</html>

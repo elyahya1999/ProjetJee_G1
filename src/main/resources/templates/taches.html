@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Taches</title>
+</head>
+<body>
+<h1>Liste des Taches</h1>
+<form action="#" th:action="@{/taches}" method="get">
+    <input type="text" th:name="keyword" th:value="${keyword}" placeholder="Search..">
+    <input type="submit" value="Search">
+</form>
+<table>
+    <tr>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Date Debut</th>
+        <th>Date Fin</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="tache : ${ListeTaches}">
+        <td th:text="${tache.nom}"></td>
+        <td th:text="${tache.description}"></td>
+        <td th:text="${tache.dateDebut}"></td>
+        <td th:text="${tache.dateFin}"></td>
+        <td th:text="${tache.status}"></td>
+        <td>
+            <a th:href="@{/editTache(id=${tache.id})}">Edit</a>
+            <a th:href="@{/deleteTache(id=${tache.id}, keyword=${keyword}, page=${currentpage})}">Delete</a>
+        </td>
+    </tr>
+</table>
+<div>
+    <ul>
+        <li th:each="i : ${#numbers.sequence(0, pages.length-1)}">
+            <a th:href="@{/taches(page=${i}, size=3, keyword=${keyword})}" th:text="${i}"></a>
+        </li>
+    </ul>
+</div>
+<a href="/formTache">Add New Tache</a>
+</body>
+</html>
