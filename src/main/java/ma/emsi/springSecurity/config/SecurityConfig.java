@@ -1,8 +1,5 @@
 package ma.emsi.springSecurity.config;
-
-
-
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,49 +14,25 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-//    private final CustomUserDetailsService userDetailsService;
-//
-//    public SecurityConfig(CustomUserDetailsService userDetailsService) {
-//        this.userDetailsService = userDetailsService;
-//    }
-//
-//
-//    @Bean
-//    public AuthenticationManager authenticationManager(HttpSecurity http, NoOpPasswordEncoder noOpPasswordEncoder)
-//            throws Exception {
-//        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-//        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(noOpPasswordEncoder);
-//        return authenticationManagerBuilder.build();
-//    }
-//
-//
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http.formLogin();
-//        http.authorizeHttpRequests().requestMatchers("/user/**").hasRole("USER");
-//        http.authorizeHttpRequests().requestMatchers("/admin/**").hasRole("ADMIN");
-//        http.authorizeHttpRequests().anyRequest().authenticated();
-//        http.formLogin();
-//        return http.build();
-//    }
-//
-//    @SuppressWarnings("deprecation")
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
-//    }
+
     @Bean
     public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
         return new InMemoryUserDetailsManager(
-        User.withUsername("user1").password("{noop}password").roles("USER").build(),
-        User.withUsername("admin1").password("{noop}password").roles("USER,ADMIN").build()
+        User.withUsername("user1").password(passwordEncoder.encode("1234")).roles("USER").build(),
+        User.withUsername("admin1").password(passwordEncoder.encode("4567")).roles("USER","ADMIN").build()
         );
     }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.formLogin().loginPage("/login").permitAll();
+        http.logout().logoutUrl("/logout").permitAll();
+        http.authorizeHttpRequests().requestMatchers("/user/**").hasRole("USER");
+        http.authorizeHttpRequests().requestMatchers("/admin/**").hasRole("ADMIN");
         http.authorizeHttpRequests().anyRequest().authenticated();
-        http.formLogin();
+        http.exceptionHandling().accessDeniedPage("/notAuthorized");
         return http.build();
     }
 

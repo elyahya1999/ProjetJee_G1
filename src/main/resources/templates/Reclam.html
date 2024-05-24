@@ -29,12 +29,6 @@
             <td th:text="${f.id}"></td>
             <td th:text="${f.titre}"></td>
             <td th:text="${f.description}"></td>
-            <td>
-                <a onclick="return confirm('mat2akad?')" class="btn btn-danger"
-                   th:href="@{deleter(id=${f.getId()})}">
-                    DELETE
-                </a>
-            </td>
         </tr>
         </tbody>
     </table>

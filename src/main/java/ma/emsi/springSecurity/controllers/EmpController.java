@@ -22,7 +22,7 @@ public class EmpController {
     //acceder a la base de donnée
     @Autowired
     private EmpRepo emp;
-    @GetMapping(path="user/index")
+    @GetMapping(path="/user/index")
     public String Employe(Model model,
                           @RequestParam(name = "page",defaultValue = "0") int page,
                           @RequestParam(name = "size",defaultValue = "3") int size,

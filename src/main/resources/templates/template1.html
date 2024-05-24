@@ -24,20 +24,20 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Employes</a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" th:href="@{/admin/formEmploye}">Nouveau Employe</a></li>
+                    <li><a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" class="dropdown-item" th:href="@{/admin/formEmploye}">Nouveau Employe</a></li>
                     <li><a class="dropdown-item" th:href="@{/user/index}">chercher Employe</a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Projets Config</a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" th:href="@{/admin/formProjet}">Nouveau projet</a></li>
+                    <li><a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" class="dropdown-item" th:href="@{/admin/formProjet}">Nouveau projet</a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Reclamation Config</a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" th:href="@{/admin/formReclam}">Nouvelle Reclamation</a></li>
+                    <li><a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" class="dropdown-item" th:href="@{/admin/formReclam}">Nouvelle Reclamation</a></li>
                 </ul>
             </li>
         </ul>

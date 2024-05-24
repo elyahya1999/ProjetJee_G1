@@ -27,7 +27,4 @@ public class Projet {
     private Integer budget;
     @ManyToOne
     private Employe employe;
-
-
-
 }
