@@ -42,13 +42,13 @@
             <td th:text="${f.getSalaire()}"></td>
             <td th:text="${f.getDaffectation()}"></td>
             <td th:text="${f.getDeparte()}"></td>
-            <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+            <td th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}">
                 <a onclick="return confirm('mat2akad?')" class="btn btn-danger"
                    th:href="@{/admin/delete(id=${f.getId()},keyword=${keyword},page=${currentpage})}">
                     DELETE
                 </a>
             </td>
-            <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+            <td th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}">
                 <a  class="btn btn-success"
                     th:href="@{/admin/editEmploye(id=${f.getId()})}">
                     EDIT
